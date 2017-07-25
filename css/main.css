@@ -1,0 +1,35 @@
+.board {
+  width: 500px;
+  height: 500px;
+  border: 1px solid #aaa;
+  font-size: 48px;
+  line-height: 62.5px;
+}
+
+.board__inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.board__square {
+  width: 12.5%;
+  height: 12.5%;
+  text-align: center;
+  background-color: #aaa;
+}
+.board__square:nth-of-type(16n+16),
+.board__square:nth-of-type(16n+14),
+.board__square:nth-of-type(16n+12),
+.board__square:nth-of-type(16n+10),
+.board__square:nth-of-type(16n+7),
+.board__square:nth-of-type(16n+5),
+.board__square:nth-of-type(16n+3),
+.board__square:nth-of-type(16n+1){
+  background-color: white;
+}
+
+.board__piece {
+  color: black;
+}
