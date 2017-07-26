@@ -1,4 +1,18 @@
 /**
+ * Object.assign ponyfill. Shallow-copy attributes from sources into target.
+ */
+exports.assign = function () {
+  var args = Array.prototype.slice.call(arguments)
+  return args.slice(1).reduce(function (acc, source) {
+    if (source == null) { return acc }
+    Object.keys(source).forEach(function (key) {
+      acc[key] = source[key]
+    })
+    return acc
+  }, args[0])
+}
+
+/**
  * Return a board square by rank and file. Currently node-chess stores the
  * board as a flat array, where index 0 == a1, and index 63 === h8. This
  * function abstracts that detail away.

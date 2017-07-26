@@ -3,6 +3,22 @@ var chess = require('chess')
 var subject = require('../src/util')
 
 describe('util', function () {
+  describe('assign', function () {
+    test('should mimic Object.assign', function () {
+      var target = {}
+      var actual = subject.assign(
+        target,
+        { foo: 1 },
+        null,
+        undefined,
+        { bar: 2 },
+        { bar: 3, baz: 4 },
+      )
+      expect(actual).toEqual({ foo: 1, bar: 3, baz: 4 })
+      expect(target).toEqual(actual)
+    })
+  })
+
   describe('getBoardSquare', function () {
     test('should return a board square by rank and file', function () {
       var game = chess.create()

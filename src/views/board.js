@@ -8,9 +8,19 @@ var positions = [8, 7, 6, 5, 4, 3, 2, 1].reduce(function (acc, rank) {
   }))
 }, [])
 
-module.exports = function (props) {
+module.exports = function (props, emit) {
   function renderSquare (pos) {
-    return square(_.getBoardSquare(pos.file, pos.rank, props.game))
+    return square(_.assign(
+      {
+        emit: emit,
+        isActive: Boolean(
+          props.activeSquare &&
+          props.activeSquare.rank === pos.rank &&
+          props.activeSquare.file === pos.file
+        )
+      },
+      _.getBoardSquare(pos.file, pos.rank, props.game),
+    ))
   }
 
   return html`

@@ -7,7 +7,7 @@ module.exports = function (state, emit) {
       <section>
         <header></header>
         <main>
-          ${board({ game: state.game, emit: emit })}
+          ${board(state, emit)}
         </main>
         <footer></footer>
       </section>
