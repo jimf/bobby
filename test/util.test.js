@@ -14,7 +14,7 @@ describe('util', function () {
         }))
       }, [])
       allPositions.forEach(function (pos) {
-        var actual = subject.getBoardSquare(pos.rank, pos.file, game)
+        var actual = subject.getBoardSquare(pos.file, pos.rank, game)
         expect(actual).toEqual(expect.objectContaining(pos))
       })
     })
