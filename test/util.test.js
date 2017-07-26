@@ -12,7 +12,7 @@ describe('util', function () {
         null,
         undefined,
         { bar: 2 },
-        { bar: 3, baz: 4 },
+        { bar: 3, baz: 4 }
       )
       expect(actual).toEqual({ foo: 1, bar: 3, baz: 4 })
       expect(target).toEqual(actual)

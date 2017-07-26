@@ -19,7 +19,7 @@ module.exports = function (props, emit) {
           props.activeSquare.file === pos.file
         )
       },
-      _.getBoardSquare(pos.file, pos.rank, props.game),
+      _.getBoardSquare(pos.file, pos.rank, props.game)
     ))
   }
 
