@@ -30,10 +30,26 @@ exports.assign = function () {
  *
  * @param {string} file Board file (a-h)
  * @param {number} rank Board rank (1-8)
+ * @param {object} gameStatus chessGame.getStatus() result
  * @return {object} Chess square
  */
-exports.getBoardSquare = function (file, rank, game) {
+exports.getBoardSquare = function (file, rank, gameStatus) {
   var x = file.charCodeAt(0) - 97
   var y = rank - 1
-  return game.getStatus().board.squares[8 * y + x]
+  return gameStatus.board.squares[8 * y + x]
+}
+
+/**
+ * Returns an index of the legal move sources in a game state for quick
+ * reference.
+ *
+ * @param {object} gameStatus chessGame.getStatus() result
+ * @return {object}
+ */
+exports.getMoveSourcesIndex = function (gameStatus) {
+  return Object.keys(gameStatus.notatedMoves).reduce(function (acc, key) {
+    var src = gameStatus.notatedMoves[key].src
+    acc[src.file + src.rank] = true
+    return acc
+  }, {})
 }

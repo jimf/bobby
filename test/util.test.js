@@ -21,7 +21,7 @@ describe('util', function () {
 
   describe('getBoardSquare', function () {
     test('should return a board square by rank and file', function () {
-      var game = chess.create()
+      var gameStatus = chess.create().getStatus()
       var ranks = [1, 2, 3, 4, 5, 6, 7, 8]
       var files = 'abcdefgh'.split('')
       var allPositions = ranks.reduce(function (acc, rank) {
@@ -30,8 +30,26 @@ describe('util', function () {
         }))
       }, [])
       allPositions.forEach(function (pos) {
-        var actual = subject.getBoardSquare(pos.file, pos.rank, game)
+        var actual = subject.getBoardSquare(pos.file, pos.rank, gameStatus)
         expect(actual).toEqual(expect.objectContaining(pos))
+      })
+    })
+  })
+
+  describe('getMoveSourcesIndex', function () {
+    test('should return an index of available move sources', function () {
+      var gameStatus = chess.create().getStatus()
+      expect(subject.getMoveSourcesIndex(gameStatus)).toEqual({
+        b1: true,
+        g1: true,
+        a2: true,
+        b2: true,
+        c2: true,
+        d2: true,
+        e2: true,
+        f2: true,
+        g2: true,
+        h2: true
       })
     })
   })
