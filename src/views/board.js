@@ -11,20 +11,20 @@ var positions = [8, 7, 6, 5, 4, 3, 2, 1].reduce(function (acc, rank) {
 module.exports = function (props, emit) {
   var gameStatus = props.game.getStatus()
   var moveSourcesIndex = _.getMoveSourcesIndex(gameStatus)
+  var destinationsIndex = props.activeSquare
+    ? _.getMoves(props.activeSquare, gameStatus)
+    : {}
 
   function isSquareActive (pos) {
-    return Boolean(
-      props.activeSquare &&
-      props.activeSquare.rank === pos.rank &&
-      props.activeSquare.file === pos.file
-    )
+    return _.isSameSquare(props.activeSquare, pos)
   }
 
   function isSquareEnabled (pos) {
+    var loc = pos.file + pos.rank
     if (!props.activeSquare) {
-      return Boolean(moveSourcesIndex[pos.file + pos.rank])
+      return Boolean(moveSourcesIndex[loc])
     }
-    return isSquareActive(pos)
+    return isSquareActive(pos) || !!destinationsIndex[pos.file + pos.rank]
   }
 
   function renderSquare (pos) {

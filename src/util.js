@@ -33,7 +33,7 @@ exports.assign = function () {
  * @param {object} gameStatus chessGame.getStatus() result
  * @return {object} Chess square
  */
-exports.getBoardSquare = function (file, rank, gameStatus) {
+exports.getBoardSquare = function getBoardSquare (file, rank, gameStatus) {
   var x = file.charCodeAt(0) - 97
   var y = rank - 1
   return gameStatus.board.squares[8 * y + x]
@@ -46,10 +46,41 @@ exports.getBoardSquare = function (file, rank, gameStatus) {
  * @param {object} gameStatus chessGame.getStatus() result
  * @return {object}
  */
-exports.getMoveSourcesIndex = function (gameStatus) {
+exports.getMoveSourcesIndex = function getMoveSourcesIndex (gameStatus) {
   return Object.keys(gameStatus.notatedMoves).reduce(function (acc, key) {
     var src = gameStatus.notatedMoves[key].src
     acc[src.file + src.rank] = true
     return acc
   }, {})
+}
+
+/**
+ * Returns an index of square:notation pairs representing the possible moves
+ * for a given occupied square.
+ *
+ * @param {object} square Chess square
+ * @param {object} gameStatus chessGame.getStatus() result
+ * @return {object}
+ */
+exports.getMoves = function getMoves (square, gameStatus) {
+  return Object.keys(gameStatus.notatedMoves).reduce(function (acc, key) {
+    var src = gameStatus.notatedMoves[key].src
+    var dest = gameStatus.notatedMoves[key].dest
+    var move = dest.file + dest.rank
+    if (!exports.isSameSquare(src, square)) { return acc }
+    acc[move] = key
+    return acc
+  }, {})
+}
+
+/**
+ * Return whether two rank/file objects represent the same square.
+ *
+ * @param {object|null} s1 Square 1
+ * @param {object|null} s2 Square 2
+ * @return {boolean}
+ */
+exports.isSameSquare = function isSameSquare (s1, s2) {
+  if (!s1 || !s2) { return false }
+  return s1.rank === s2.rank && s1.file === s2.file
 }

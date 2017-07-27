@@ -53,4 +53,31 @@ describe('util', function () {
       })
     })
   })
+
+  describe('getMoves', function () {
+    test('should return an index of move:notation pairs for given occupied square', function () {
+      var gameStatus = chess.create().getStatus()
+      expect(subject.getMoves({ file: 'g', rank: 1 }, gameStatus)).toEqual({
+        f3: 'Nf3',
+        h3: 'Nh3'
+      })
+    })
+  })
+
+  describe('isSameSquare', function () {
+    test('returns false if either value is null', function () {
+      expect(subject.isSameSquare(null, { rank: 1, file: 'a' })).toBe(false)
+      expect(subject.isSameSquare({ rank: 1, file: 'a' }, null)).toBe(false)
+      expect(subject.isSameSquare(null, null)).toBe(false)
+    })
+
+    test('returns false if rank for file values do not match', function () {
+      expect(subject.isSameSquare({ rank: 1, file: 'a' }, { rank: 1, file: 'b' })).toBe(false)
+      expect(subject.isSameSquare({ rank: 1, file: 'a' }, { rank: 2, file: 'a' })).toBe(false)
+    })
+
+    test('returns true if rank and file values match', function () {
+      expect(subject.isSameSquare({ rank: 1, file: 'a' }, { rank: 1, file: 'a' })).toBe(true)
+    })
+  })
 })
