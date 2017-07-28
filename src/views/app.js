@@ -1,5 +1,6 @@
 var html = require('choo/html')
 var board = require('./board')
+var gameInfo = require('./game_info')
 
 module.exports = function (state, emit) {
   return html`
@@ -7,7 +8,8 @@ module.exports = function (state, emit) {
       <section>
         <header></header>
         <main>
-          ${board(state, emit)}
+          <div class="col">${board(state, emit)}</div>
+          <div class="col">${gameInfo(state)}</div>
         </main>
         <footer></footer>
       </section>

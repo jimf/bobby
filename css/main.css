@@ -14,12 +14,34 @@ th, td {
 h1, h2, h3, h4, h5, h6, th, td, caption { font-weight:normal; }
 img { border: 0; }
 
+ol, ul {
+  margin: 0 0 2.5rem 0;
+  padding-left: 0;
+}
+li { margin-bottom: 1rem; }
+
+#app {
+  color: #222;
+  font-family: Roboto;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.col {
+  float: left;
+}
+
 .board {
   border: 1px solid #f1d1ff;
-  height: 500px;
-  line-height: 62.5px;
+  border-radius: 3px;
+  height: 90vh;
+  line-height: 10vh;
   margin: 0 0 20px 20px;
-  width: 500px;
+  width: 90vh;
 }
 
 .board__inner {
@@ -72,7 +94,7 @@ img { border: 0; }
   border: 2px solid transparent;
   cursor: pointer;
   display: inline-block;
-  font-size: 48px;
+  font-size: 10vh;
   height: 100%;
   line-height: inherit;
   padding: 0;
@@ -89,4 +111,21 @@ img { border: 0; }
 
 .board__piece {
   color: black;
+}
+
+.game-info {
+  margin-left: 40px;
+  border: 1px solid #f1d1ff;
+  border-radius: 3px;
+  width: 300px;
+}
+
+.game-info__header {
+  background-color: #f1d1ff;
+  padding: 20px;
+}
+
+.game-info__move-history {
+  padding-top: 20px;
+  padding-left: 30px;
 }
