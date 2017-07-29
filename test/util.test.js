@@ -19,6 +19,19 @@ describe('util', function () {
     })
   })
 
+  describe('chunksOf', function () {
+    test('should split array into n-sized chunks', function () {
+      var cases = [
+        { input: [2, []], expected: [] },
+        { input: [2, [1, 2, 3, 4, 5]], expected: [[1, 2], [3, 4], [5]] },
+        { input: [3, [1, 2, 3, 4, 5, 6]], expected: [[1, 2, 3], [4, 5, 6]] }
+      ]
+      cases.forEach(function (testcase) {
+        expect(subject.chunksOf.apply(null, testcase.input)).toEqual(testcase.expected)
+      })
+    })
+  })
+
   describe('getBoardSquare', function () {
     test('should return a board square by rank and file', function () {
       var gameStatus = chess.create().getStatus()

@@ -29,6 +29,13 @@ li { margin-bottom: 1rem; }
   right: 0;
   bottom: 0;
   left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.app-section {
+  margin: 0 auto;
+  width: calc(90vh + 420px);
 }
 
 .col {
@@ -89,6 +96,9 @@ li { margin-bottom: 1rem; }
 .board__square.board__square--is-active {
   background-color: #fff7cf;
 }
+.board__square.board__square--is-recent {
+  background-color: #edffcf;
+}
 .board__square-button {
   background-color: transparent;
   border: 2px solid transparent;
@@ -125,7 +135,30 @@ li { margin-bottom: 1rem; }
   padding: 20px;
 }
 
+.game-info__main {
+  height: calc(90vh - 118px);
+  overflow: auto;
+}
+
 .game-info__move-history {
-  padding-top: 20px;
-  padding-left: 30px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 2.5rem;
+  width: 100%;
+}
+
+.game-info__move-history th:first-child,
+.game-info__move-history td:first-child {
+  padding-left: 20px;
+}
+.game-info__move-history th,
+.game-info__move-history td {
+  border-bottom: 1px solid #e1e1e1;
+  padding: 8px 15px;
+  text-align: left;
+}
+
+.game-info__footer {
+  height: 59px;
+  background: #f1d1ff;
 }

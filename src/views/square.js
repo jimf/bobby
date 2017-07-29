@@ -4,7 +4,8 @@ var piece = require('./chess_piece')
 
 module.exports = function (props) {
   var className = cx('board__square', {
-    'board__square--is-active': props.isActive
+    'board__square--is-active': props.isActive,
+    'board__square--is-recent': props.isRecent
   })
 
   function handleClick () {

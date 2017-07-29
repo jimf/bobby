@@ -13,6 +13,22 @@ exports.assign = function () {
 }
 
 /**
+ * Split up an array into an array of arrays of n length.
+ *
+ * @param {number} n Size of chunks
+ * @param {*[]} xs Array to split
+ * @return {*[][]}
+ */
+exports.chunksOf = function chunksOf (n, xs) {
+  var result = []
+  for (var i = 0; i < xs.length; i += 1) {
+    if (i % n === 0) { result.push([]) }
+    result[result.length - 1].push(xs[i])
+  }
+  return result
+}
+
+/**
  * Return a board square by rank and file. Currently node-chess stores the
  * board as a flat array, where index 0 == a1, and index 63 === h8. This
  * function abstracts that detail away.

@@ -14,6 +14,10 @@ module.exports = function (props, emit) {
   var destinationsIndex = props.activeSquare
     ? _.getMoves(props.activeSquare, gameStatus)
     : {}
+  var moveHistory = props.game.game.moveHistory
+  var lastMove = moveHistory.length > 0
+    ? moveHistory[moveHistory.length - 1]
+    : null
 
   function isSquareActive (pos) {
     return _.isSameSquare(props.activeSquare, pos)
@@ -27,6 +31,12 @@ module.exports = function (props, emit) {
     return isSquareActive(pos) || !!destinationsIndex[pos.file + pos.rank]
   }
 
+  function isRecentMove (pos) {
+    if (lastMove === null) { return false }
+    return _.isSameSquare(pos, { file: lastMove.prevFile, rank: lastMove.prevRank }) ||
+      _.isSameSquare(pos, { file: lastMove.postFile, rank: lastMove.postRank })
+  }
+
   function renderSquare (pos) {
     var squareData = _.getBoardSquare(pos.file, pos.rank, gameStatus)
 
@@ -34,7 +44,8 @@ module.exports = function (props, emit) {
       {
         disabled: !isSquareEnabled(pos),
         emit: emit,
-        isActive: isSquareActive(pos)
+        isActive: isSquareActive(pos),
+        isRecent: isRecentMove(pos)
       },
       squareData
     ))
