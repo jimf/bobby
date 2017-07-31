@@ -19,7 +19,8 @@
   "dependencies": {
     "chess": "^0.2.8",
     "choo": "^5.6.2",
-    "classnames": "^2.2.5"
+    "classnames": "^2.2.5",
+    "picomodal": "^3.0.0"
   },
   "devDependencies": {
     "budo": "^10.0.4",

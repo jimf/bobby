@@ -4,6 +4,7 @@ var _ = require('./util')
 module.exports = function (state, emitter) {
   state.game = chess.create()
   state.activeSquare = null
+  state.showModal = false
 
   emitter.on('clickSquare', function (pos) {
     var gameStatus = state.game.getStatus()
@@ -21,5 +22,40 @@ module.exports = function (state, emitter) {
       state.activeSquare = null
       emitter.emit('render')
     }
+  })
+
+  emitter.on('loadMoveList', function (moveList) {
+    var isValid = true
+    var moves = moveList.trim().split('\n')
+    var game = chess.create()
+
+    moves.forEach(function (move) {
+      if (!isValid) { return }
+      try {
+        game.move(move)
+      } catch (e) {
+        isValid = false
+      }
+    })
+
+    if (isValid) {
+      state.game = game
+      state.showLoadGameModal = false
+      emitter.emit('render')
+    }
+  })
+
+  emitter.on('showCopyMovesModal', function () {
+    state.showModal = 'copyMoves'
+    emitter.emit('render')
+  })
+
+  emitter.on('showLoadGameModal', function () {
+    state.showModal = 'loadGame'
+    emitter.emit('render')
+  })
+
+  emitter.on('closeModal', function () {
+    state.showModal = false
   })
 }

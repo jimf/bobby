@@ -1,7 +1,7 @@
 var html = require('choo/html')
 var _ = require('../util')
 
-module.exports = function (props) {
+module.exports = function (props, emit) {
   function renderMove (move, idx) {
     return html`
       <tr>
@@ -10,6 +10,14 @@ module.exports = function (props) {
         <td>${move[1] ? move[1].algebraic : ''}</td>
       </tr>
     `
+  }
+
+  function handleLoadGameClick () {
+    emit('showLoadGameModal')
+  }
+
+  function handleCopyGameClick () {
+    emit('showCopyMovesModal')
   }
 
   return html`
@@ -30,6 +38,8 @@ module.exports = function (props) {
         </table>
       </main>
       <footer class="game-info__footer">
+        <button type="button" onclick=${handleLoadGameClick}>Load Game</button>
+        <button type="button" onclick=${handleCopyGameClick}>Copy Moves</button>
       </footer>
     </section>
   `

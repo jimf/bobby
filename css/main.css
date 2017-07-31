@@ -20,9 +20,60 @@ ol, ul {
 }
 li { margin-bottom: 1rem; }
 
-#app {
+body {
   color: #222;
   font-family: Roboto;
+}
+
+button {
+  -webkit-appearance: button;
+  background-color: #d26efd;
+  border: 1px solid #d26efd;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  height: 38px;
+  line-height: 38px;
+  margin: 0 0 1.5rem 0;
+  padding: 0 20px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+textarea {
+  border: 1px solid #d1d1d1;
+  border-radius: 3px;
+  box-shadow: none;
+  margin-bottom: 1.5rem;
+  min-height: 65px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+}
+
+textarea:focus {
+  border: 1px solid #e19cff;
+  outline: none;
+}
+
+.pico-content {
+  min-width: 300px;
+}
+
+#app {
   padding: 10px;
   position: fixed;
   top: 0;
@@ -121,6 +172,7 @@ li { margin-bottom: 1rem; }
 
 .board__piece {
   color: black;
+  font-weight: normal;
 }
 
 .game-info {
@@ -159,6 +211,7 @@ li { margin-bottom: 1rem; }
 }
 
 .game-info__footer {
-  height: 59px;
   background: #f1d1ff;
+  height: 59px;
+  line-height: 59px;
 }
