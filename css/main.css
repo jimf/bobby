@@ -128,22 +128,22 @@ textarea:focus {
 .board__square:nth-of-type(16n+1){
   background-color: white;
 }
-.board__square:nth-of-type(1)::before  { position: absolute; left: -15px; content: '8' }
-.board__square:nth-of-type(9)::before  { position: absolute; left: -15px; content: '7' }
-.board__square:nth-of-type(17)::before { position: absolute; left: -15px; content: '6' }
-.board__square:nth-of-type(25)::before { position: absolute; left: -15px; content: '5' }
-.board__square:nth-of-type(33)::before { position: absolute; left: -15px; content: '4' }
-.board__square:nth-of-type(41)::before { position: absolute; left: -15px; content: '3' }
-.board__square:nth-of-type(49)::before { position: absolute; left: -15px; content: '2' }
-.board__square:nth-of-type(57)::before { position: absolute; left: -15px; content: '1' }
-.board__square:nth-of-type(57)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; content: 'a' }
-.board__square:nth-of-type(58)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; content: 'b' }
-.board__square:nth-of-type(59)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; content: 'c' }
-.board__square:nth-of-type(60)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; content: 'd' }
-.board__square:nth-of-type(61)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; content: 'e' }
-.board__square:nth-of-type(62)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; content: 'f' }
-.board__square:nth-of-type(63)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; content: 'g' }
-.board__square:nth-of-type(64)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; content: 'h' }
+.board__square:nth-of-type(1)::before  { position: absolute; left: -15px; top: 0; content: '8' }
+.board__square:nth-of-type(9)::before  { position: absolute; left: -15px; top: 0; content: '7' }
+.board__square:nth-of-type(17)::before { position: absolute; left: -15px; top: 0; content: '6' }
+.board__square:nth-of-type(25)::before { position: absolute; left: -15px; top: 0; content: '5' }
+.board__square:nth-of-type(33)::before { position: absolute; left: -15px; top: 0; content: '4' }
+.board__square:nth-of-type(41)::before { position: absolute; left: -15px; top: 0; content: '3' }
+.board__square:nth-of-type(49)::before { position: absolute; left: -15px; top: 0; content: '2' }
+.board__square:nth-of-type(57)::before { position: absolute; left: -15px; top: 0; content: '1' }
+.board__square:nth-of-type(57)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; left: 46%; content: 'a' }
+.board__square:nth-of-type(58)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; left: 46%; content: 'b' }
+.board__square:nth-of-type(59)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; left: 46%; content: 'c' }
+.board__square:nth-of-type(60)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; left: 46%; content: 'd' }
+.board__square:nth-of-type(61)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; left: 46%; content: 'e' }
+.board__square:nth-of-type(62)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; left: 46%; content: 'f' }
+.board__square:nth-of-type(63)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; left: 46%; content: 'g' }
+.board__square:nth-of-type(64)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; left: 46%; content: 'h' }
 .board__square.board__square--is-active {
   background-color: #fff7cf;
 }
