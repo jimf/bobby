@@ -2,6 +2,7 @@ var chess = require('chess')
 var _ = require('./util')
 
 module.exports = function (state, emitter) {
+  window.state = state
   state.game = chess.create()
   state.activeSquare = null
   state.showModal = false
@@ -26,7 +27,9 @@ module.exports = function (state, emitter) {
 
   emitter.on('loadMoveList', function (moveList) {
     var isValid = true
-    var moves = moveList.trim().split('\n')
+    var moves = moveList.trim().split('\n').map(function (line) {
+      return line.trim().replace(/^\d+\. /, '')
+    }).join(' ').split(' ')
     var game = chess.create()
 
     moves.forEach(function (move) {

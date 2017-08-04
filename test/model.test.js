@@ -1,4 +1,5 @@
 /* eslint-env jest */
+var chess = require('chess')
 var model = require('../src/model')
 
 function createMockEmitter (options) {
@@ -74,6 +75,46 @@ describe('model', function () {
       clickSquare({ rank: 3, file: 'f' })
       expect(state.activeSquare).toBe(null)
       expect(state.game.getStatus().board.lastMovedPiece.type).toBe('knight')
+    })
+  })
+
+  describe('loadMoveList handler', function () {
+    test('should load game state from a valid linear string of moves', function () {
+      var loadMoveList
+      var state = {}
+      var emitter = createMockEmitter({
+        on: function (eventName, cb) {
+          if (eventName === 'loadMoveList') { loadMoveList = cb }
+        }
+      })
+      var expectedGame = chess.create()
+      expectedGame.move('e4')
+      expectedGame.move('e5')
+      expectedGame.move('Nf3')
+      model(state, emitter)
+      loadMoveList('e4\ne5\nNf3')
+      expect(state.game.game.getHashCode()).toBe(expectedGame.game.getHashCode())
+      expect(state.showLoadGameModal).toBe(false)
+      expect(emitter.emit).toHaveBeenCalledWith('render')
+    })
+
+    test('should load game state from a valid formatted string of moves', function () {
+      var loadMoveList
+      var state = {}
+      var emitter = createMockEmitter({
+        on: function (eventName, cb) {
+          if (eventName === 'loadMoveList') { loadMoveList = cb }
+        }
+      })
+      var expectedGame = chess.create()
+      expectedGame.move('e4')
+      expectedGame.move('e5')
+      expectedGame.move('Nf3')
+      model(state, emitter)
+      loadMoveList('1. e4 e5\n2. Nf3')
+      expect(state.game.game.getHashCode()).toBe(expectedGame.game.getHashCode())
+      expect(state.showLoadGameModal).toBe(false)
+      expect(emitter.emit).toHaveBeenCalledWith('render')
     })
   })
 })
