@@ -188,6 +188,8 @@ textarea:focus {
 }
 
 .game-info__main {
+  display: block;
+  height: 572px;
   height: calc(90vh - 118px);
   overflow: auto;
 }
