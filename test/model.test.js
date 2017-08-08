@@ -13,9 +13,12 @@ describe('model', function () {
   test('initial state', function () {
     var state = {}
     var emitter = createMockEmitter()
-    model(state, emitter)
+    model()(state, emitter)
     expect(state.game.game.moveHistory).toEqual([])
     expect(state.activeSquare).toBe(null)
+    expect(state.config).toEqual({
+      theme: 'default'
+    })
   })
 
   describe('clickSquare handler', function () {
@@ -27,7 +30,7 @@ describe('model', function () {
           if (eventName === 'clickSquare') { clickSquare = cb }
         }
       })
-      model(state, emitter)
+      model()(state, emitter)
       clickSquare({ rank: 1, file: 'a' })
       expect(state.activeSquare).toEqual({ rank: 1, file: 'a' })
       expect(emitter.emit).toHaveBeenCalledWith('render')
@@ -41,7 +44,7 @@ describe('model', function () {
           if (eventName === 'clickSquare') { clickSquare = cb }
         }
       })
-      model(state, emitter)
+      model()(state, emitter)
       clickSquare({ rank: 1, file: 'a' })
       clickSquare({ rank: 1, file: 'a' })
       expect(state.activeSquare).toBe(null)
@@ -55,7 +58,7 @@ describe('model', function () {
           if (eventName === 'clickSquare') { clickSquare = cb }
         }
       })
-      model(state, emitter)
+      model()(state, emitter)
       clickSquare({ rank: 2, file: 'e' })
       clickSquare({ rank: 4, file: 'e' })
       expect(state.activeSquare).toBe(null)
@@ -70,7 +73,7 @@ describe('model', function () {
           if (eventName === 'clickSquare') { clickSquare = cb }
         }
       })
-      model(state, emitter)
+      model()(state, emitter)
       clickSquare({ rank: 1, file: 'g' })
       clickSquare({ rank: 3, file: 'f' })
       expect(state.activeSquare).toBe(null)
@@ -91,7 +94,7 @@ describe('model', function () {
       expectedGame.move('e4')
       expectedGame.move('e5')
       expectedGame.move('Nf3')
-      model(state, emitter)
+      model()(state, emitter)
       loadMoveList('e4\ne5\nNf3')
       expect(state.game.game.getHashCode()).toBe(expectedGame.game.getHashCode())
       expect(state.showLoadGameModal).toBe(false)
@@ -110,7 +113,7 @@ describe('model', function () {
       expectedGame.move('e4')
       expectedGame.move('e5')
       expectedGame.move('Nf3')
-      model(state, emitter)
+      model()(state, emitter)
       loadMoveList('1. e4 e5\n2. Nf3')
       expect(state.game.game.getHashCode()).toBe(expectedGame.game.getHashCode())
       expect(state.showLoadGameModal).toBe(false)
