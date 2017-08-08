@@ -77,6 +77,20 @@ describe('util', function () {
     })
   })
 
+  describe('getSquareSide', function () {
+    test('should return whether given square is white or black', function () {
+      var cases = [
+        { input: ['a', 1], expected: 'black' },
+        { input: ['a', 2], expected: 'white' },
+        { input: ['h', 1], expected: 'white' },
+        { input: ['a', 7], expected: 'black' }
+      ]
+      cases.forEach(function (testcase) {
+        expect(subject.getSquareSide.apply(null, testcase.input)).toBe(testcase.expected)
+      })
+    })
+  })
+
   describe('isSameSquare', function () {
     test('returns false if either value is null', function () {
       expect(subject.isSameSquare(null, { rank: 1, file: 'a' })).toBe(false)

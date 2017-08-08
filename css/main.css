@@ -21,16 +21,13 @@ ol, ul {
 li { margin-bottom: 1rem; }
 
 body {
-  color: #222;
   font-family: Roboto;
 }
 
 button {
   -webkit-appearance: button;
-  background-color: #d26efd;
-  border: 1px solid #d26efd;
+  border: 1px solid transparent;
   border-radius: 3px;
-  color: #fff;
   cursor: pointer;
   display: inline-block;
   font-size: 11px;
@@ -51,7 +48,7 @@ label {
 }
 
 textarea {
-  border: 1px solid #d1d1d1;
+  border: 1px solid transparent;
   border-radius: 3px;
   box-shadow: none;
   margin-bottom: 1.5rem;
@@ -65,7 +62,7 @@ textarea {
 }
 
 textarea:focus {
-  border: 1px solid #e19cff;
+  border: 1px solid transparent;
   outline: none;
 }
 
@@ -94,7 +91,7 @@ textarea:focus {
 }
 
 .board {
-  border: 1px solid #f1d1ff;
+  border: 1px solid transparent;
   border-radius: 3px;
   height: 90vh;
   line-height: 10vh;
@@ -110,23 +107,12 @@ textarea:focus {
 }
 
 .board__square {
-  background-color: #f1d1ff;
   height: 12.5%;
   line-height: inherit;
   padding: 0;
   position: relative;
   text-align: center;
   width: 12.5%;
-}
-.board__square:nth-of-type(16n+16),
-.board__square:nth-of-type(16n+14),
-.board__square:nth-of-type(16n+12),
-.board__square:nth-of-type(16n+10),
-.board__square:nth-of-type(16n+7),
-.board__square:nth-of-type(16n+5),
-.board__square:nth-of-type(16n+3),
-.board__square:nth-of-type(16n+1){
-  background-color: white;
 }
 .board__square:nth-of-type(1)::before  { position: absolute; left: -15px; top: 0; content: '8' }
 .board__square:nth-of-type(9)::before  { position: absolute; left: -15px; top: 0; content: '7' }
@@ -144,14 +130,7 @@ textarea:focus {
 .board__square:nth-of-type(62)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; left: 46%; content: 'f' }
 .board__square:nth-of-type(63)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; left: 46%; content: 'g' }
 .board__square:nth-of-type(64)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; left: 46%; content: 'h' }
-.board__square.board__square--is-active {
-  background-color: #fff7cf;
-}
-.board__square.board__square--is-recent {
-  background-color: #edffcf;
-}
 .board__square-button {
-  background-color: transparent;
   border: 2px solid transparent;
   cursor: pointer;
   display: inline-block;
@@ -164,26 +143,23 @@ textarea:focus {
 }
 .board__square-button:focus {
   outline: none;
-  border-color: #ddaaee;
 }
 .board__square-button:disabled {
   cursor: default;
 }
 
 .board__piece {
-  color: black;
   font-weight: normal;
 }
 
 .game-info {
   margin-left: 40px;
-  border: 1px solid #f1d1ff;
+  border: 1px solid transparent;
   border-radius: 3px;
   width: 300px;
 }
 
 .game-info__header {
-  background-color: #f1d1ff;
   padding: 20px;
 }
 
@@ -207,13 +183,32 @@ textarea:focus {
 }
 .game-info__move-history th,
 .game-info__move-history td {
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid transparent;
   padding: 8px 15px;
   text-align: left;
 }
 
 .game-info__footer {
-  background: #f1d1ff;
   height: 59px;
   line-height: 59px;
 }
+
+/* ==== Themes ============================================================ */
+
+/* Default */
+.theme-default { color: #222; }
+.theme-default button { background-color: #d26efd; border-color: #d26efd; color: #fff; }
+.theme-default textarea { border-color: #d1d1d1; }
+.theme-default textarea:focus { border-color: #e19cff; }
+.theme-default .board__square.side-white { background-color: white; }
+.theme-default .board__square.board__square--is-active { background-color: #fff7cf; }
+.theme-default .board__square.board__square--is-recent { background-color: #edffcf; }
+.theme-default .board__square-button { background-color: transparent; border-color: transparent; }
+.theme-default .board__square-button:focus { border-color: #ddaaee; }
+.theme-default .board__piece { color: black; }
+.theme-default .board, .theme-default .game-info { border-color: #f1d1ff; }
+.theme-default .board__square,
+.theme-default .game-info__header,
+.theme-default .game-info__footer { background-color: #f1d1ff; }
+.theme-default .game-info__move-history th,
+.theme-default .game-info__move-history td { border-color: #e1e1e1; }

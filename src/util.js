@@ -90,6 +90,19 @@ exports.getMoves = function getMoves (square, gameStatus) {
 }
 
 /**
+ * Return whether the given file/rank is white or black.
+ *
+ * @param {string} file Board file (a-h)
+ * @param {number} rank Board rank (1-8)
+ * @return {string} "white" or "black"
+ */
+exports.getSquareSide = function getSquareSide (file, rank) {
+  var x = 'abcdefgh'.indexOf(file)
+  var y = rank - 1
+  return (x + y) % 2 === 0 ? 'black' : 'white'
+}
+
+/**
  * Return whether two rank/file objects represent the same square.
  *
  * @param {object|null} s1 Square 1

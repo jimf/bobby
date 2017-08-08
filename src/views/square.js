@@ -1,9 +1,10 @@
 var html = require('choo/html')
 var cx = require('classnames')
 var piece = require('./chess_piece')
+var _ = require('../util')
 
 module.exports = function (props) {
-  var className = cx('board__square', {
+  var className = cx('board__square', 'side-' + _.getSquareSide(props.file, props.rank), {
     'board__square--is-active': props.isActive,
     'board__square--is-recent': props.isRecent
   })
