@@ -1,6 +1,7 @@
 var html = require('choo/html')
 var board = require('./board')
 var gameInfo = require('./game_info')
+var configureModal = require('./configure_modal')
 var copyMovesModal = require('./copy_moves_modal')
 var loadGameModal = require('./load_game_modal')
 
@@ -16,6 +17,7 @@ module.exports = function (state, emit) {
         </main>
         <footer></footer>
       </section>
+      ${state.showModal === 'configure' ? configureModal(state, emit) : ''}
       ${state.showModal === 'copyMoves' ? copyMovesModal(state, emit) : ''}
       ${state.showModal === 'loadGame' ? loadGameModal(emit) : ''}
     </div>

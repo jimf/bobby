@@ -12,6 +12,10 @@ module.exports = function (props, emit) {
     `
   }
 
+  function handleConfigureClick () {
+    emit('showConfigureModal')
+  }
+
   function handleLoadGameClick () {
     emit('showLoadGameModal')
   }
@@ -24,7 +28,7 @@ module.exports = function (props, emit) {
     <section class="game-info">
       <header class="game-info__header">
         <div>
-          <strong>${props.game.game.getCurrentSide().name}</strong> to move
+          <strong>${props.game.game.getCurrentSide().name}</strong> to move${props.game.getStatus().isCheck ? ' (check!)' : ''}
         </div>
       </header>
       <main class="game-info__main">
@@ -38,8 +42,15 @@ module.exports = function (props, emit) {
         </table>
       </main>
       <footer class="game-info__footer">
-        <button type="button" onclick=${handleLoadGameClick}>Load Game</button>
-        <button type="button" onclick=${handleCopyGameClick}>Copy Moves</button>
+        <button type="button" class="button-icon" onclick=${handleLoadGameClick} title="Load Game" aria-label="Load Game">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="button-icon" onclick=${handleCopyGameClick} title="Copy Moves" aria-label="Copy Moves">
+          <i class="fa fa-download" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="button-icon" onclick=${handleConfigureClick} title="Configure" aria-label="Configure">
+          <i class="fa fa-cog" aria-hidden="true"></i>
+        </button>
       </footer>
     </section>
   `

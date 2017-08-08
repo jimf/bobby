@@ -1,11 +1,15 @@
 var chess = require('chess')
 var _ = require('./util')
 
-module.exports = function () {
+module.exports = function (opts) {
   return function (state, emitter) {
     state.game = chess.create()
     state.activeSquare = null
     state.showModal = false
+    state.themes = [
+      { value: 'default', label: 'Default' },
+      { value: 'chess-dot-com', label: 'Chess.com' }
+    ]
     state.config = {
       theme: 'default'
     }
@@ -51,6 +55,17 @@ module.exports = function () {
       }
     })
 
+    emitter.on('setTheme', function (theme) {
+      opts.removeBodyClass('theme-' + state.config.theme)
+      state.config.theme = theme
+      opts.addBodyClass('theme-' + theme)
+    })
+
+    emitter.on('showConfigureModal', function () {
+      state.showModal = 'configure'
+      emitter.emit('render')
+    })
+
     emitter.on('showCopyMovesModal', function () {
       state.showModal = 'copyMoves'
       emitter.emit('render')
@@ -64,5 +79,7 @@ module.exports = function () {
     emitter.on('closeModal', function () {
       state.showModal = false
     })
+
+    emitter.emit('setTheme', state.config.theme)
   }
 }
