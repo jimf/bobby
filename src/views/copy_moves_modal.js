@@ -19,8 +19,7 @@ module.exports = function (props, emit) {
       <label for="move-history-textarea">
         Copy & paste move history to send to a friend
       </label>
-
-      <textarea onfocus=${handleFocus} readonly=${true}>${moves}</textarea>
+      <textarea id="move-history-textarea" onfocus=${handleFocus} readonly=${true}>${moves}</textarea>
     </div>
   `).afterClose(function () {
     emit('closeModal')
