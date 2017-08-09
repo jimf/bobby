@@ -1,5 +1,15 @@
 var html = require('choo/html')
 var _ = require('../util')
+var c = require('../constants')
+
+function stringifyCaptured (side, captured) {
+  return _.times(captured[side].queen, _.K(c.symbols[side + 'queen']))
+    .concat(_.times(captured[side].rook, _.K(c.symbols[side + 'rook'])))
+    .concat(_.times(captured[side].knight, _.K(c.symbols[side + 'knight'])))
+    .concat(_.times(captured[side].bishop, _.K(c.symbols[side + 'bishop'])))
+    .concat(_.times(captured[side].pawn, _.K(c.symbols[side + 'pawn'])))
+    .join('')
+}
 
 module.exports = function (props, emit) {
   function renderMove (move, idx) {
@@ -9,6 +19,19 @@ module.exports = function (props, emit) {
         <td>${move[0].algebraic}</td>
         <td>${move[1] ? move[1].algebraic : ''}</td>
       </tr>
+    `
+  }
+
+  function renderCapturedPieces () {
+    var captured = _.getCapturedPieces(props.game)
+    var white = stringifyCaptured('white', captured)
+    var black = stringifyCaptured('black', captured)
+
+    return html`
+      <div>
+        <div>${white}</div>
+        <div>${black}</div>
+      </div>
     `
   }
 
@@ -32,6 +55,7 @@ module.exports = function (props, emit) {
         </div>
       </header>
       <main class="game-info__main">
+        ${renderCapturedPieces()}
         <table class="game-info__move-history">
           <thead>
             <tr><th>move</th><th>white</th><th>black</th></tr>

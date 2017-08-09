@@ -1,3 +1,9 @@
+exports.K = function (x) {
+  return function (_) {
+    return x
+  }
+}
+
 /**
  * Object.assign ponyfill. Shallow-copy attributes from sources into target.
  */
@@ -53,6 +59,24 @@ exports.getBoardSquare = function getBoardSquare (file, rank, gameStatus) {
   var x = file.charCodeAt(0) - 97
   var y = rank - 1
   return gameStatus.board.squares[8 * y + x]
+}
+
+/**
+ * Return an object representation of all captured pieces in a game.
+ *
+ * @param {object} game Chess game
+ * @return {object}
+ */
+exports.getCapturedPieces = function getCapturedPieces (game) {
+  return game.game.moveHistory.reduce(function (acc, move) {
+    if (!move.capturedPiece) { return acc }
+    var piece = move.capturedPiece
+    acc[piece.side.name][piece.type] += 1
+    return acc
+  }, {
+    white: { rook: 0, knight: 0, bishop: 0, queen: 0, king: 0, pawn: 0 },
+    black: { rook: 0, knight: 0, bishop: 0, queen: 0, king: 0, pawn: 0 }
+  })
 }
 
 /**
@@ -112,4 +136,12 @@ exports.getSquareSide = function getSquareSide (file, rank) {
 exports.isSameSquare = function isSameSquare (s1, s2) {
   if (!s1 || !s2) { return false }
   return s1.rank === s2.rank && s1.file === s2.file
+}
+
+exports.times = function times (n, fn) {
+  var result = []
+  for (var i = 0; i < n; i += 1) {
+    result.push(fn())
+  }
+  return result
 }

@@ -3,6 +3,7 @@ var _ = require('./util')
 
 module.exports = function (opts) {
   return function (state, emitter) {
+    window.state = state
     function createPreferencesObject () {
       return {
         version: 1,
