@@ -8,7 +8,7 @@ module.exports = function (props, emit) {
 
   function renderThemeOption (theme) {
     return html`
-      <option value="${theme.value}" selected=${theme.value === props.config.theme}>
+      <option value="${theme.value}" selected=${theme.value === props.activeTheme}>
         ${theme.label}
       </option>
     `
