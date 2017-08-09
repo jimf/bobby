@@ -2,13 +2,19 @@ var html = require('choo/html')
 var _ = require('../util')
 var c = require('../constants')
 
+function stringifyPiece (side, piece, count) {
+  if (count === 0) {
+    return ''
+  } else if (count <= 2) {
+    return _.times(count, _.K(c.symbols[side + piece])).join('')
+  }
+  return c.symbols[side + piece] + '×' + count
+}
+
 function stringifyCaptured (side, captured) {
-  return _.times(captured[side].queen, _.K(c.symbols[side + 'queen']))
-    .concat(_.times(captured[side].rook, _.K(c.symbols[side + 'rook'])))
-    .concat(_.times(captured[side].knight, _.K(c.symbols[side + 'knight'])))
-    .concat(_.times(captured[side].bishop, _.K(c.symbols[side + 'bishop'])))
-    .concat(_.times(captured[side].pawn, _.K(c.symbols[side + 'pawn'])))
-    .join('')
+  return ['queen', 'rook', 'knight', 'bishop', 'pawn'].reduce(function (acc, piece) {
+    return acc + stringifyPiece(side, piece, captured[side][piece])
+  }, '')
 }
 
 module.exports = function (props, emit) {
@@ -28,7 +34,7 @@ module.exports = function (props, emit) {
     var black = stringifyCaptured('black', captured)
 
     return html`
-      <div>
+      <div class="game-info__captured-pieces">
         <div>${white}</div>
         <div>${black}</div>
       </div>

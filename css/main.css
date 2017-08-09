@@ -183,6 +183,10 @@ textarea:focus {
   overflow: auto;
 }
 
+.game-info__captured-pieces {
+  font-size: 1.6em;
+}
+
 .game-info__move-history {
   border-collapse: collapse;
   border-spacing: 0;
