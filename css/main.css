@@ -41,6 +41,11 @@ button {
   text-transform: uppercase;
 }
 
+button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
 label {
   display: block;
   margin-bottom: 0.5rem;
@@ -158,7 +163,7 @@ textarea:focus {
   outline: none;
 }
 .board__square-button:disabled {
-  cursor: default;
+  opacity: 1;
 }
 
 .board__piece {

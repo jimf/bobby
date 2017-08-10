@@ -53,6 +53,14 @@ module.exports = function (props, emit) {
     emit('showCopyMovesModal')
   }
 
+  function handleUndoClick () {
+    emit('undoMove')
+  }
+
+  function handleRedoClick () {
+    emit('redoMove')
+  }
+
   return html`
     <section class="game-info">
       <header class="game-info__header">
@@ -80,6 +88,12 @@ module.exports = function (props, emit) {
         </button>
         <button type="button" class="button-icon" onclick=${handleConfigureClick} title="Configure" aria-label="Configure">
           <i class="fa fa-cog" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="button-icon" onclick=${handleUndoClick} title="Configure" aria-label="Undo" disabled=${!props.move}>
+          <i class="fa fa-undo" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="button-icon" onclick=${handleRedoClick} title="Configure" aria-label="Redo" disabled=${props.nextMoves.length === 0}>
+          <i class="fa fa-repeat" aria-hidden="true"></i>
         </button>
       </footer>
     </section>

@@ -3,7 +3,6 @@ var _ = require('./util')
 
 module.exports = function (opts) {
   return function (state, emitter) {
-    window.state = state
     function createPreferencesObject () {
       return {
         version: 1,
@@ -12,6 +11,9 @@ module.exports = function (opts) {
     }
 
     state.game = chess.create()
+    state.previousMoves = []
+    state.move = null
+    state.nextMoves = []
     state.activeSquare = null
     state.showModal = false
     state.themes = [
@@ -34,7 +36,11 @@ module.exports = function (opts) {
         state.activeSquare = null
         emitter.emit('render')
       } else {
-        state.game.move(move[pos.file + pos.rank])
+        if (state.move) {
+          state.previousMoves.push(state.move)
+        }
+        state.move = state.game.move(move[pos.file + pos.rank]).move.algebraic
+        state.nextMoves = []
         state.activeSquare = null
         emitter.emit('render')
       }
@@ -58,7 +64,12 @@ module.exports = function (opts) {
 
       if (isValid) {
         state.game = game
-        state.showLoadGameModal = false
+        state.previousMoves = game.game.moveHistory.slice(0, -1).map(function (move) {
+          return move.algebraic
+        })
+        state.move = game.game.moveHistory[game.game.moveHistory.length - 1].algebraic
+        state.nextMoves = []
+        state.showModal = false
         emitter.emit('render')
       }
     })
@@ -87,6 +98,34 @@ module.exports = function (opts) {
 
     emitter.on('closeModal', function () {
       state.showModal = false
+    })
+
+    emitter.on('undoMove', function () {
+      if (!state.move) { return }
+      var game = chess.create()
+      state.nextMoves.unshift(state.move)
+      state.move = state.previousMoves.pop() || null
+      // TODO: eventually this should just be a render call
+      state.previousMoves.concat(state.move ? [state.move] : []).forEach(function (move) {
+        game.move(move)
+      })
+      state.game = game
+      emitter.emit('render')
+    })
+
+    emitter.on('redoMove', function () {
+      if (state.nextMoves.length === 0) { return }
+      var game = chess.create()
+      if (state.move) {
+        state.previousMoves.push(state.move)
+      }
+      state.move = state.nextMoves.shift() || null
+      // TODO: eventually this should just be a render call
+      state.previousMoves.concat(state.move ? [state.move] : []).forEach(function (move) {
+        game.move(move)
+      })
+      state.game = game
+      emitter.emit('render')
     })
 
     emitter.emit('setTheme', state.activeTheme)
