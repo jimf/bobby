@@ -1,5 +1,6 @@
 var html = require('choo/html')
 var picoModal = require('picomodal')
+var c = require('../constants')
 
 module.exports = function (props, emit) {
   function handleThemeChange (e) {
@@ -19,7 +20,7 @@ module.exports = function (props, emit) {
       <label>
         <span>Theme</span>
         <select onchange=${handleThemeChange}>
-          ${props.themes.map(renderThemeOption)}
+          ${c.themes.map(renderThemeOption)}
         </select>
       </label>
     </div>

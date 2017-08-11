@@ -1,6 +1,6 @@
 /* eslint-env jest */
-var chess = require('chess')
 var model = require('../src/model')
+var State = require('../src/state')
 
 function createMockEmitter (options) {
   return {
@@ -10,114 +10,105 @@ function createMockEmitter (options) {
 }
 
 describe('model', function () {
-  test('initial state', function () {
+  test('initial state without preferences', function () {
     var state = {}
     var emitter = createMockEmitter()
-    model()(state, emitter)
-    expect(state.game.game.moveHistory).toEqual([])
-    expect(state.activeSquare).toBe(null)
-    expect(state.config).toEqual({
-      theme: 'default'
+    model({})(state, emitter)
+    expect(state.state).toEqual(State())
+    expect(emitter.on).toHaveBeenCalledWith('*', expect.any(Function))
+    expect(emitter.emit).toHaveBeenCalledWith('setTheme', State().activeTheme)
+  })
+
+  test('initial state with preferences', function () {
+    var state = {}
+    var emitter = createMockEmitter()
+    model({ preferences: { theme: 'dummy-theme' } })(state, emitter)
+    expect(state.state).toEqual(State().setTheme('dummy-theme'))
+    expect(emitter.on).toHaveBeenCalledWith('*', expect.any(Function))
+    expect(emitter.emit).toHaveBeenCalledWith('setTheme', 'dummy-theme')
+  })
+
+  test('setTheme action handler', function () {
+    var handler
+    var state = {}
+    var emitter = createMockEmitter({
+      on: function (eventName, cb) {
+        handler = cb
+      }
+    })
+    var opts = {
+      addBodyClass: jest.fn(),
+      removeBodyClass: jest.fn(),
+      savePreferences: jest.fn()
+    }
+    model(opts)(state, emitter)
+    handler('setTheme', 'dummy-theme')
+
+    expect(opts.removeBodyClass).toHaveBeenCalledWith('theme-default')
+    expect(opts.addBodyClass).toHaveBeenCalledWith('theme-dummy-theme')
+    expect(state.state).toEqual(State().setTheme('dummy-theme'))
+    expect(opts.savePreferences).toHaveBeenCalledWith({
+      version: 1,
+      theme: 'dummy-theme'
     })
   })
 
-  describe('clickSquare handler', function () {
-    test('should activate the square when activeSquare is null', function () {
-      var clickSquare
-      var state = {}
-      var emitter = createMockEmitter({
-        on: function (eventName, cb) {
-          if (eventName === 'clickSquare') { clickSquare = cb }
-        }
-      })
-      model()(state, emitter)
-      clickSquare({ rank: 1, file: 'a' })
-      expect(state.activeSquare).toEqual({ rank: 1, file: 'a' })
-      expect(emitter.emit).toHaveBeenCalledWith('render')
+  test('closeModal action handler', function () {
+    var handler
+    var state = {}
+    var emitter = createMockEmitter({
+      on: function (eventName, cb) {
+        handler = cb
+      }
     })
+    model({})(state, emitter)
+    handler('showModal', 'dummy-modal')
+    handler('closeModal')
 
-    test('should deactivate the square it is already active', function () {
-      var clickSquare
-      var state = {}
-      var emitter = createMockEmitter({
-        on: function (eventName, cb) {
-          if (eventName === 'clickSquare') { clickSquare = cb }
-        }
-      })
-      model()(state, emitter)
-      clickSquare({ rank: 1, file: 'a' })
-      clickSquare({ rank: 1, file: 'a' })
-      expect(state.activeSquare).toBe(null)
-    })
-
-    test('should move active pawn to destination square and deactivate active square', function () {
-      var clickSquare
-      var state = {}
-      var emitter = createMockEmitter({
-        on: function (eventName, cb) {
-          if (eventName === 'clickSquare') { clickSquare = cb }
-        }
-      })
-      model()(state, emitter)
-      clickSquare({ rank: 2, file: 'e' })
-      clickSquare({ rank: 4, file: 'e' })
-      expect(state.activeSquare).toBe(null)
-      expect(state.game.getStatus().board.lastMovedPiece.type).toBe('pawn')
-    })
-
-    test('should move active knight to destination square and deactivate active square', function () {
-      var clickSquare
-      var state = {}
-      var emitter = createMockEmitter({
-        on: function (eventName, cb) {
-          if (eventName === 'clickSquare') { clickSquare = cb }
-        }
-      })
-      model()(state, emitter)
-      clickSquare({ rank: 1, file: 'g' })
-      clickSquare({ rank: 3, file: 'f' })
-      expect(state.activeSquare).toBe(null)
-      expect(state.game.getStatus().board.lastMovedPiece.type).toBe('knight')
-    })
+    expect(state.state.activeModal).toBe(null)
   })
 
-  describe('loadMoveList handler', function () {
-    test('should load game state from a valid linear string of moves', function () {
-      var loadMoveList
-      var state = {}
-      var emitter = createMockEmitter({
-        on: function (eventName, cb) {
-          if (eventName === 'loadMoveList') { loadMoveList = cb }
-        }
-      })
-      var expectedGame = chess.create()
-      expectedGame.move('e4')
-      expectedGame.move('e5')
-      expectedGame.move('Nf3')
-      model()(state, emitter)
-      loadMoveList('e4\ne5\nNf3')
-      expect(state.game.game.getHashCode()).toBe(expectedGame.game.getHashCode())
-      expect(state.showLoadGameModal).toBe(false)
-      expect(emitter.emit).toHaveBeenCalledWith('render')
+  test('unhandled action', function () {
+    var handler
+    var state = {}
+    var emitter = createMockEmitter({
+      on: function (eventName, cb) {
+        handler = cb
+      }
     })
+    model({})(state, emitter)
+    handler('unhandledAction')
 
-    test('should load game state from a valid formatted string of moves', function () {
-      var loadMoveList
-      var state = {}
-      var emitter = createMockEmitter({
-        on: function (eventName, cb) {
-          if (eventName === 'loadMoveList') { loadMoveList = cb }
-        }
-      })
-      var expectedGame = chess.create()
-      expectedGame.move('e4')
-      expectedGame.move('e5')
-      expectedGame.move('Nf3')
-      model()(state, emitter)
-      loadMoveList('1. e4 e5\n2. Nf3')
-      expect(state.game.game.getHashCode()).toBe(expectedGame.game.getHashCode())
-      expect(state.showLoadGameModal).toBe(false)
-      expect(emitter.emit).toHaveBeenCalledWith('render')
+    expect(state.state).toEqual(State())
+  })
+
+  test('handled action that does not modify state', function () {
+    var handler
+    var state = {}
+    var emitter = createMockEmitter({
+      on: function (eventName, cb) {
+        handler = cb
+      }
     })
+    model({})(state, emitter)
+    handler('loadMoveList', 'junk input')
+
+    expect(state.state).toEqual(State())
+    expect(emitter.emit).not.toHaveBeenCalledWith('render')
+  })
+
+  test('other handled action that modifies state', function () {
+    var handler
+    var state = {}
+    var emitter = createMockEmitter({
+      on: function (eventName, cb) {
+        handler = cb
+      }
+    })
+    model({})(state, emitter)
+    handler('clickSquare', { file: 'e', rank: 2 })
+
+    expect(state.state).toEqual(State().clickSquare({ file: 'e', rank: 2 }))
+    expect(emitter.emit).toHaveBeenCalledWith('render')
   })
 })

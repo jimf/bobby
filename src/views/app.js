@@ -4,22 +4,24 @@ var gameInfo = require('./game_info')
 var configureModal = require('./configure_modal')
 var copyMovesModal = require('./copy_moves_modal')
 var loadGameModal = require('./load_game_modal')
+var presenter = require('../presenter')
 
 module.exports = function (state, emit) {
+  var props = presenter(state.state)
   return html`
     <div id="app">
       <section class="app-section">
         <header></header>
         <main>
-          <div class="col">${board(state, emit)}</div>
-          <div class="col">${gameInfo(state, emit)}</div>
+          <div class="col">${board(props, emit)}</div>
+          <div class="col">${gameInfo(props, emit)}</div>
           <div style="clear:both"></div>
         </main>
         <footer></footer>
       </section>
-      ${state.showModal === 'configure' ? configureModal(state, emit) : ''}
-      ${state.showModal === 'copyMoves' ? copyMovesModal(state, emit) : ''}
-      ${state.showModal === 'loadGame' ? loadGameModal(emit) : ''}
+      ${props.activeModal === 'configure' ? configureModal(props, emit) : ''}
+      ${props.activeModal === 'copyMoves' ? copyMovesModal(props, emit) : ''}
+      ${props.activeModal === 'loadGame' ? loadGameModal(emit) : ''}
     </div>
   `
 }

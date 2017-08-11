@@ -22,16 +22,15 @@ module.exports = function (props, emit) {
     return html`
       <tr>
         <td>${idx + 1}.</td>
-        <td>${move[0].algebraic}</td>
-        <td>${move[1] ? move[1].algebraic : ''}</td>
+        <td>${move[0]}</td>
+        <td>${move[1] ? move[1] : ''}</td>
       </tr>
     `
   }
 
   function renderCapturedPieces () {
-    var captured = _.getCapturedPieces(props.game)
-    var white = stringifyCaptured('white', captured)
-    var black = stringifyCaptured('black', captured)
+    var white = stringifyCaptured('white', props.capturedPieces)
+    var black = stringifyCaptured('black', props.capturedPieces)
 
     return html`
       <div class="game-info__captured-pieces">
@@ -42,15 +41,15 @@ module.exports = function (props, emit) {
   }
 
   function handleConfigureClick () {
-    emit('showConfigureModal')
+    emit('showModal', 'configure')
   }
 
   function handleLoadGameClick () {
-    emit('showLoadGameModal')
+    emit('showModal', 'loadGame')
   }
 
   function handleCopyGameClick () {
-    emit('showCopyMovesModal')
+    emit('showModal', 'copyMoves')
   }
 
   function handleUndoClick () {
@@ -65,7 +64,7 @@ module.exports = function (props, emit) {
     <section class="game-info">
       <header class="game-info__header">
         <div>
-          <strong>${props.game.game.getCurrentSide().name}</strong> to move${props.game.getStatus().isCheck ? ' (check!)' : ''}
+          <strong>${props.currentSide}</strong> to move${props.isCheck ? ' (check!)' : ''}
         </div>
       </header>
       <main class="game-info__main">
@@ -75,7 +74,7 @@ module.exports = function (props, emit) {
             <tr><th>move</th><th>white</th><th>black</th></tr>
           </thead>
           <tbody>
-            ${_.chunksOf(2, props.game.game.moveHistory).map(renderMove)}
+            ${_.chunksOf(2, props.moveHistory).map(renderMove)}
           </tbody>
         </table>
       </main>

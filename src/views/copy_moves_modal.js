@@ -3,9 +3,9 @@ var picoModal = require('picomodal')
 var _ = require('../util')
 
 module.exports = function (props, emit) {
-  var moves = _.chunksOf(2, props.game.game.moveHistory)
+  var moves = _.chunksOf(2, props.moveHistory)
     .map(function (move, idx) {
-      return (idx + 1) + '. ' + move[0].algebraic + (move[1] ? (' ' + move[1].algebraic) : '')
+      return (idx + 1) + '. ' + move[0] + (move[1] ? (' ' + move[1]) : '')
     })
     .join('\n')
   var modal

@@ -12,3 +12,8 @@ exports.symbols = {
   blackknight: '♞',
   blackpawn: '♟'
 }
+
+exports.themes = [
+  { value: 'default', label: 'Default' },
+  { value: 'chess-dot-com', label: 'Chess.com' }
+]

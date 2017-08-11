@@ -4,7 +4,7 @@ var piece = require('./chess_piece')
 var _ = require('../util')
 
 module.exports = function (props) {
-  var className = cx('board__square', 'side-' + _.getSquareSide(props.file, props.rank), {
+  var className = cx('board__square', 'side-' + props.color, {
     'board__square--is-active': props.isActive,
     'board__square--is-recent': props.isRecent
   })
@@ -15,7 +15,7 @@ module.exports = function (props) {
 
   return html`
     <div class="${className}">
-      <button type="button" class="board__square-button" onclick=${handleClick} disabled="${props.disabled}">
+      <button type="button" class="board__square-button" onclick=${handleClick} disabled="${!props.isEnabled}">
         ${props.piece === null ? '' : piece(props.piece)}
       </button>
     </div>
