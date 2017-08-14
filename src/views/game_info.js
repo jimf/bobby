@@ -18,6 +18,17 @@ function stringifyCaptured (side, captured) {
 }
 
 module.exports = function (props, emit) {
+  function renderHeader () {
+    return html`
+      <header class="game-info__header">
+        ${props.isCheckmate
+          ? html`<div><strong>${props.currentSide === 'white' ? 'black' : 'white'}</strong> wins!</div>`
+          : html`<div><strong>${props.currentSide}</strong> to move${props.isCheck ? ' (check!)' : ''}</div>`
+        }
+      </header>
+    `
+  }
+
   function renderMove (move, idx) {
     return html`
       <tr>
@@ -62,11 +73,7 @@ module.exports = function (props, emit) {
 
   return html`
     <section class="game-info">
-      <header class="game-info__header">
-        <div>
-          <strong>${props.currentSide}</strong> to move${props.isCheck ? ' (check!)' : ''}
-        </div>
-      </header>
+      ${renderHeader()}
       <main class="game-info__main">
         ${renderCapturedPieces()}
         <table class="game-info__move-history">

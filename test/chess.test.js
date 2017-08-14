@@ -3,6 +3,20 @@ var chess = require('chess')
 var subject = require('../src/chess')
 
 describe('Chess', function () {
+  describe('annotateMove', function () {
+    test('should return input given no other state', function () {
+      expect(subject.annotateMove('e7', {})).toBe('e7')
+    })
+
+    test('should return input with "+" annotation when move implies check', function () {
+      expect(subject.annotateMove('e7', { isCheck: true })).toBe('e7+')
+    })
+
+    test('should return input with "#" annotation when move implies checkmate', function () {
+      expect(subject.annotateMove('e7', { isCheckmate: true })).toBe('e7#')
+    })
+  })
+
   describe('createGame', function () {
     test('should return new game given empty move history', function () {
       var game = subject.createGame([])

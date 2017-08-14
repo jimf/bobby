@@ -1,6 +1,19 @@
 var chess = require('chess')
 
 /**
+ * Return a move, decorated with additional annotations where appropriate.
+ *
+ * @param {string} algebraic Move (in algebraic notation)
+ * @param {object} options Additional state information
+ * @return {string}
+ */
+exports.annotateMove = function annotateMove (algebraic, options) {
+  return algebraic +
+    (options.isCheck ? '+' : '') +
+    (options.isCheckmate ? '#' : '')
+}
+
+/**
  * Create a game object, given a list of moves. Returns null if moves are
  * invalid.
  *

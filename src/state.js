@@ -76,7 +76,7 @@ State.prototype.clickSquare = function clickSquare (pos) {
 
   return this.extend({
     previousMoves: previousMoves,
-    move: move.move.algebraic,
+    move: chess.annotateMove(move.move.algebraic, game),
     nextMoves: [],
     activeSquare: null
   })

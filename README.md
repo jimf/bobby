@@ -19,9 +19,6 @@ Also on the side, I want to play around with [Choo](https://choo.io/) ;-).
 - Add additional themes
 - Add ability to invert board
 - Move undo/redo
-- Annotate check moves with traditional "+"
-- Annotate checkmate moves with traditional "#"
-- Render a checkmate state
 - Drag and drop for movement?
 
 ## How to run
