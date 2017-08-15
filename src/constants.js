@@ -14,6 +14,20 @@ exports.symbols = {
 }
 
 exports.themes = [
-  { value: 'default', label: 'Default' },
-  { value: 'chess-dot-com', label: 'Chess.com' }
+  {
+    value: 'default',
+    label: 'Default',
+    whiteSquare: '#fff',
+    blackSquare: '#f1d1ff',
+    active: '#fff7cf',
+    recent: '#edffcf'
+  },
+  {
+    value: 'chess-dot-com',
+    label: 'Chess.com',
+    whiteSquare: '#ebebd2',
+    blackSquare: '#6a9058',
+    active: '#f7f68d',
+    recent: '#b8ca55'
+  }
 ]

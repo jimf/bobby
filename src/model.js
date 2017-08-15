@@ -22,13 +22,6 @@ module.exports = function (opts) {
       var newState
 
       switch (action) {
-        case 'setTheme':
-          opts.removeBodyClass('theme-' + state.state.activeTheme)
-          opts.addBodyClass('theme-' + actionArgs[0])
-          state.state = state.state.setTheme(actionArgs[0])
-          opts.savePreferences(createPreferencesObject())
-          break
-
         case 'closeModal':
           state.state = state.state.showModal(null)
           break
@@ -42,8 +35,10 @@ module.exports = function (opts) {
             }
           }
       }
-    })
 
-    emitter.emit('setTheme', state.state.activeTheme)
+      if (action === 'setTheme') {
+        opts.savePreferences(createPreferencesObject())
+      }
+    })
   }
 }

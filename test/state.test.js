@@ -96,6 +96,7 @@ describe('State', function () {
   describe('setTheme', function () {
     test('should update active theme', function () {
       var subject = State().setTheme('dummy-theme')
+      expect(subject.activeModal).toBe(null)
       expect(subject.activeTheme).toBe('dummy-theme')
     })
 

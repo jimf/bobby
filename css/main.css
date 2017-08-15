@@ -113,8 +113,9 @@ textarea:focus {
 }
 
 .board {
-  border: 1px solid transparent;
   border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
   height: 90vh;
   line-height: 10vh;
   margin: 0 0 20px 20px;
@@ -153,17 +154,21 @@ textarea:focus {
 .board__square:nth-of-type(63)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; left: 46%; content: 'g' }
 .board__square:nth-of-type(64)::after  { font-size: 16px; line-height: 16px; position: absolute; bottom: -24px; left: 46%; content: 'h' }
 .board__square-button {
+  background-color: transparent;
   border: 2px solid transparent;
+  border-radius: 0;
+  box-shadow: none;
   cursor: pointer;
   display: inline-block;
   font-size: 10vh;
   height: 100%;
   line-height: inherit;
   padding: 0;
-  transition: border 0.3s;
+  transition: box-shadow 0.25s;
   width: 100%;
 }
 .board__square-button:focus {
+  box-shadow: rgb(0, 0, 0) 0 0 0 2px inset;
   outline: none;
 }
 .board__square-button:disabled {
@@ -222,23 +227,3 @@ textarea:focus {
   height: 59px;
   line-height: 59px;
 }
-
-/* ==== Themes ============================================================ */
-
-/* Default */
-.theme-default .board__square.side-white { background-color: white; }
-.theme-default .board__square.board__square--is-active { background-color: #fff7cf; }
-.theme-default .board__square.board__square--is-recent { background-color: #edffcf; }
-.theme-default .board__square-button { background-color: transparent; border-color: transparent; }
-.theme-default .board__square-button:focus { border-color: #ddaaee; }
-.theme-default .board { border-color: #f1d1ff; }
-.theme-default .board__square { background-color: #f1d1ff; }
-
-/* chess.dom */
-.theme-chess-dot-com .board__square.side-white { background-color: #EBEBD2; }
-.theme-chess-dot-com .board__square.board__square--is-active { background-color: #F7F68D; }
-.theme-chess-dot-com .board__square.board__square--is-recent { background-color: #B8CA55; }
-.theme-chess-dot-com .board__square-button { background-color: transparent; border-color: transparent; }
-.theme-chess-dot-com .board__square-button:focus { border-color: #4B6D3B; }
-.theme-chess-dot-com .board { border-color: #6A9058; }
-.theme-chess-dot-com .board__square { background-color: #6A9058; }

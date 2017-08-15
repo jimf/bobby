@@ -16,7 +16,6 @@ describe('model', function () {
     model({})(state, emitter)
     expect(state.state).toEqual(State())
     expect(emitter.on).toHaveBeenCalledWith('*', expect.any(Function))
-    expect(emitter.emit).toHaveBeenCalledWith('setTheme', State().activeTheme)
   })
 
   test('initial state with preferences', function () {
@@ -25,7 +24,6 @@ describe('model', function () {
     model({ preferences: { theme: 'dummy-theme' } })(state, emitter)
     expect(state.state).toEqual(State().setTheme('dummy-theme'))
     expect(emitter.on).toHaveBeenCalledWith('*', expect.any(Function))
-    expect(emitter.emit).toHaveBeenCalledWith('setTheme', 'dummy-theme')
   })
 
   test('setTheme action handler', function () {
@@ -37,20 +35,17 @@ describe('model', function () {
       }
     })
     var opts = {
-      addBodyClass: jest.fn(),
-      removeBodyClass: jest.fn(),
       savePreferences: jest.fn()
     }
     model(opts)(state, emitter)
     handler('setTheme', 'dummy-theme')
 
-    expect(opts.removeBodyClass).toHaveBeenCalledWith('theme-default')
-    expect(opts.addBodyClass).toHaveBeenCalledWith('theme-dummy-theme')
     expect(state.state).toEqual(State().setTheme('dummy-theme'))
     expect(opts.savePreferences).toHaveBeenCalledWith({
       version: 1,
       theme: 'dummy-theme'
     })
+    expect(emitter.emit).toHaveBeenCalledWith('render')
   })
 
   test('closeModal action handler', function () {

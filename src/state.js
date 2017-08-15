@@ -112,7 +112,7 @@ State.prototype.loadMoveList = function loadMoveList (moveList) {
 State.prototype.setTheme = function setTheme (theme) {
   return theme === this.activeTheme
     ? this
-    : this.extend({ activeTheme: theme })
+    : this.extend({ activeModal: null, activeTheme: theme })
 }
 
 /**

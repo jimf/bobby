@@ -37,6 +37,22 @@ describe('util', function () {
     })
   })
 
+  describe('findWhere', function () {
+    test('should return undefined if needle cannot be found', function () {
+      expect(subject.findWhere([], { id: 1 })).toBe(undefined)
+    })
+
+    test('should return first item that matches all properties', function () {
+      var items = [
+        null,
+        { id: 1, color: 'red', size: 'l' },
+        { id: 2, color: 'green', size: 'l' },
+        { id: 3, color: 'red', size: 'l' }
+      ]
+      expect(subject.findWhere(items, { color: 'red', size: 'l' })).toBe(items[1])
+    })
+  })
+
   describe('times', function () {
     test('returns empty array when n is 0', function () {
       expect(subject.times(0, subject.K(true))).toEqual([])

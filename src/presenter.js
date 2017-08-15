@@ -1,4 +1,6 @@
+var c = require('./constants')
 var chess = require('./chess')
+var _ = require('./util')
 
 var positions = [8, 7, 6, 5, 4, 3, 2, 1].reduce(function (acc, rank) {
   return acc.concat('abcdefgh'.split('').map(function (file) {
@@ -61,6 +63,7 @@ module.exports = function (state) {
         isEnabled: isSquareEnabled(pos),
         isRecent: isRecentMove(pos)
       }
-    })
+    }),
+    theme: _.findWhere(c.themes, { value: state.activeTheme })
   }
 }

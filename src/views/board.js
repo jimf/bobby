@@ -6,14 +6,15 @@ module.exports = function (props, emit) {
   function renderSquare (squareData) {
     return square(_.assign(
       {
-        emit: emit
+        emit: emit,
+        theme: props.theme
       },
       squareData
     ))
   }
 
   return html`
-    <div class="board">
+    <div class="board" style="border-color:${props.theme.blackSquare}">
       <div class="board__inner">
         ${props.squares.map(renderSquare)}
       </div>

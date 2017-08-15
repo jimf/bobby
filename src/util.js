@@ -40,6 +40,26 @@ exports.chunksOf = function chunksOf (n, xs) {
 }
 
 /**
+ * Find the first item in an array of items that matches all of the key/value
+ * pairs listed in props.
+ *
+ * @param {*[]} xs Array of items
+ * @param {object} props Key/value pairs to compare with
+ * @return {*}
+ */
+exports.findWhere = function findWhere (xs, props) {
+  var item
+  var match
+  for (var i = 0, len = xs.length; i < len; i += 1) {
+    item = xs[i]
+    match = Object.keys(props).every(function (key) {
+      return item && item[key] === props[key]
+    })
+    if (match) { return item }
+  }
+}
+
+/**
  * Run a function n times, returning an array of the return values.
  *
  * @param {number} n Number of times to run function
