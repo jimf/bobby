@@ -22,6 +22,7 @@ Also on the side, I want to play around with [Choo](https://choo.io/) ;-).
   - Make each move clickable in move history
   - Display "future" moves in gray
 - Improved rendering of square and portrait-oriented viewports
+- Display Reinfeld values / difference in some way
 - Drag and drop for movement?
 
 ## How to run
