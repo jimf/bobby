@@ -18,7 +18,10 @@ Also on the side, I want to play around with [Choo](https://choo.io/) ;-).
 
 - Add additional themes
 - Add ability to invert board
-- Move undo/redo
+- Undo/redo improvements
+  - Make each move clickable in move history
+  - Display "future" moves in gray
+- Improved rendering of square and portrait-oriented viewports
 - Drag and drop for movement?
 
 ## How to run
