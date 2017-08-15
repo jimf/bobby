@@ -21,13 +21,17 @@ ol, ul {
 li { margin-bottom: 1rem; }
 
 body {
+  color: #222;
   font-family: Roboto;
 }
 
 button {
   -webkit-appearance: button;
+  background-color: #dbd9d7;
   border: 1px solid transparent;
+  border-color: #dbd9d7;
   border-radius: 3px;
+  color: #666463;
   cursor: pointer;
   display: inline-block;
   font-size: 11px;
@@ -53,7 +57,7 @@ label {
 }
 
 textarea {
-  border: 1px solid transparent;
+  border: 1px solid #d1d1d1;
   border-radius: 3px;
   box-shadow: none;
   margin-bottom: 1.5rem;
@@ -67,7 +71,7 @@ textarea {
 }
 
 textarea:focus {
-  border: 1px solid transparent;
+  border: 1px solid #dbd9d7;
   outline: none;
 }
 
@@ -167,17 +171,20 @@ textarea:focus {
 }
 
 .board__piece {
+  color: black;
   font-weight: normal;
 }
 
 .game-info {
   margin-left: 40px;
-  border: 1px solid transparent;
+  border: 1px solid #dbd9d7;
   border-radius: 3px;
   width: 300px;
 }
 
 .game-info__header {
+  background-color: #f1f1f1;
+  color: #666463;
   padding: 20px;
 }
 
@@ -205,12 +212,13 @@ textarea:focus {
 }
 .game-info__move-history th,
 .game-info__move-history td {
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid #e1e1e1;
   padding: 8px 15px;
   text-align: left;
 }
 
 .game-info__footer {
+  background-color: #f1f1f1;
   height: 59px;
   line-height: 59px;
 }
@@ -218,40 +226,19 @@ textarea:focus {
 /* ==== Themes ============================================================ */
 
 /* Default */
-.theme-default { color: #222; }
-.theme-default button { background-color: #d26efd; border-color: #d26efd; color: #fff; }
-.theme-default textarea { border-color: #d1d1d1; }
-.theme-default textarea:focus { border-color: #e19cff; }
 .theme-default .board__square.side-white { background-color: white; }
 .theme-default .board__square.board__square--is-active { background-color: #fff7cf; }
 .theme-default .board__square.board__square--is-recent { background-color: #edffcf; }
 .theme-default .board__square-button { background-color: transparent; border-color: transparent; }
 .theme-default .board__square-button:focus { border-color: #ddaaee; }
-.theme-default .board__piece { color: black; }
-.theme-default .board,
-.theme-default .game-info { border-color: #f1d1ff; }
-.theme-default .board__square,
-.theme-default .game-info__header,
-.theme-default .game-info__footer { background-color: #f1d1ff; }
-.theme-default .game-info__move-history th,
-.theme-default .game-info__move-history td { border-color: #e1e1e1; }
+.theme-default .board { border-color: #f1d1ff; }
+.theme-default .board__square { background-color: #f1d1ff; }
 
 /* chess.dom */
-.theme-chess-dot-com { color: #222; }
-.theme-chess-dot-com button { background-color: #dbd9d7; border-color: #dbd9d7; color: #666463; }
-.theme-chess-dot-com textarea { border-color: #d1d1d1; }
-.theme-chess-dot-com textarea:focus { border-color: #dbd9d7; }
 .theme-chess-dot-com .board__square.side-white { background-color: #EBEBD2; }
 .theme-chess-dot-com .board__square.board__square--is-active { background-color: #F7F68D; }
 .theme-chess-dot-com .board__square.board__square--is-recent { background-color: #B8CA55; }
 .theme-chess-dot-com .board__square-button { background-color: transparent; border-color: transparent; }
 .theme-chess-dot-com .board__square-button:focus { border-color: #4B6D3B; }
-.theme-chess-dot-com .board__piece { color: black; }
-.theme-chess-dot-com .board,
-.theme-chess-dot-com .game-info { border-color: #6A9058; }
-.theme-chess-dot-com .board__square,
-.theme-chess-dot-com .game-info__header,
-.theme-chess-dot-com .game-info__footer { background-color: #6A9058; }
-.theme-chess-dot-com .game-info__header { color: #eee; }
-.theme-chess-dot-com .game-info__move-history th,
-.theme-chess-dot-com .game-info__move-history td { border-color: #e1e1e1; }
+.theme-chess-dot-com .board { border-color: #6A9058; }
+.theme-chess-dot-com .board__square { background-color: #6A9058; }
