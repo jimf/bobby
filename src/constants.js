@@ -45,5 +45,13 @@ exports.themes = [
     blackSquare: '#D07238',
     active: '#f7f68d',
     recent: '#ffbb90'
+  },
+  {
+    value: 'slate',
+    label: 'Slate',
+    whiteSquare: '#c0c0c0',
+    blackSquare: '#808080',
+    active: '#f7f68d',
+    recent: '#b8ca55'
   }
 ]
