@@ -53,5 +53,13 @@ exports.themes = [
     blackSquare: '#808080',
     active: '#f7f68d',
     recent: '#b8ca55'
+  },
+  {
+    value: 'muted-green',
+    label: 'Muted Green',
+    whiteSquare: '#efefef',
+    blackSquare: '#a5d29e',
+    active: '#f7f68d',
+    recent: '#8ca84b'
   }
 ]
