@@ -176,8 +176,10 @@ textarea:focus {
 }
 
 .board__piece {
-  color: black;
-  font-weight: normal;
+  display: inline-block;
+  fill: #404040;
+  height: 10vh;
+  width: 10vh;
 }
 
 .game-info {
