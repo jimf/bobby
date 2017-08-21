@@ -93,6 +93,7 @@ textarea:focus {
 }
 
 #app {
+  max-height: 100vw;
   padding: 10px;
   position: fixed;
   top: 0;
@@ -117,7 +118,6 @@ textarea:focus {
   border-style: solid;
   border-width: 1px;
   height: 90vh;
-  line-height: 10vh;
   margin: 0 0 20px 20px;
   width: 90vh;
 }
@@ -160,7 +160,6 @@ textarea:focus {
   box-shadow: none;
   cursor: pointer;
   display: inline-block;
-  font-size: 10vh;
   height: 100%;
   line-height: inherit;
   padding: 0;
@@ -178,8 +177,8 @@ textarea:focus {
 .board__piece {
   display: inline-block;
   fill: #404040;
-  height: 10vh;
-  width: 10vh;
+  height: 100%;
+  width: 100%;
 }
 
 .game-info {
@@ -228,4 +227,12 @@ textarea:focus {
   background-color: #f1f1f1;
   height: 59px;
   line-height: 59px;
+}
+
+.is-tall .board {
+  height: calc(100vw - 378px);
+  width: calc(100vw - 378px);
+}
+.is-tall .game-info__main {
+  height: calc(100vw - 378px - 118px);
 }
